@@ -1,0 +1,125 @@
+#migursearch_results {
+    width: 250px;
+    background-color: #EEEEEE;
+    border: 1px solid #DDDDDD;    
+    margin: 1px 1px 0;
+    padding: 0 0 3px;
+}
+
+
+#migursearch_results a:hover {
+    background-color: transparent;
+}
+
+#migursearch_results .mg_row1 {
+    background-color: #ffffff;
+    border: 1px solid #DDDDDD;    
+    margin:3px 3px 0;
+    overflow: hidden;
+}
+
+#migursearch_results .mg_row2 {
+    background-color: #f8f8f8;
+    border: 1px solid #DDDDDD;    
+    margin:3px 3px 0;
+    overflow: hidden;
+}
+
+#migursearch_results div a{
+    color: #FFF;
+    text-decoration: none;
+}
+#migursearch_results div a h3{
+    padding: 0 5px;
+    margin: 0;
+    background-color: #DDDDDD;    
+    font-size: 1em;
+}
+#migursearch_results div div p{
+    padding:0;
+    margin:0;
+}
+#migursearch_results div div .ps_readmore span{
+    width: 230px;
+    padding: 0 10px 0 0;
+    display:block;
+    text-align:right;
+    color: #999;
+}
+#migursearch_results .ps_row1 div{
+    width: 240px;
+    padding: 5px 0 5px 10px;
+    margin: 0;
+    background: #EEE;
+}
+#migursearch_results .ps_row2 div{
+    width: 240px;
+    padding: 5px 0 5px 10px;
+    margin: 0;
+    background: #CCC;
+}
+#migursearch_results .ps_adv_link {
+    text-decoration:none;
+}
+#migursearch_results .ps_adv_link span{
+    width: 240px;
+    padding: 5px 0 0 10px;
+    display:block;
+    background: #999;
+    color: #FFF;
+}
+
+#migursearch_results #mg_adv_link{
+    display: block;
+    float: right;
+    margin: 0 5px 3px;
+}
+#migursearch_results #mg_adv_link:hover {
+    background-color: transparent;
+    color: #888;
+}
+
+#migursearch_results .resulttext{
+    padding: 5px;
+}
+
+#migursearch_results .resulttext * {
+    line-height: 1em;
+    color: #333333;
+}
+
+#migursearch_results .mg_adv_link span {
+    color: #333333;
+}
+.migursearch_noresults {
+    text-align: center;
+}
+
+#migursearch_results #mg_no_results {
+    padding: 0 0 0 5px;
+}
+
+#migursearch_results .mg_readmore {
+    display:block;
+    float: right;
+    color: #888888;
+}
+
+#migursearch_results .mg_readmore * {
+    color: #888888;
+    font-size: 0.8em;
+}
+
+#migursearch_results .mg_cat {
+    color: #888888;
+    font-size: 0.8em;
+}
+
+#migursearch_close {
+    background-image: url('../system/images/modal/closebox.gif');
+    width: 22px;
+    height: 22px;
+    right: -10px;
+    top: -10px;
+    position: absolute;
+}

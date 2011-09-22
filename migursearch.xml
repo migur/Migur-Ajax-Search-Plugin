@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="content">
+	<name>Content - Migur AJAX Search</name>
+	<author>Henrik Hussfelt</author>
+	<creationDate>July 2011</creationDate>
+	<copyright>Copyright (C) 2011 Migur Ltd. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>henrik@migur.com</authorEmail>
+	<authorUrl>www.migur.com</authorUrl>
+	<version>1.0</version>
+	<description>Unobtrusive lightweight search plugin</description>
+
+	<files>
+		<filename plugin="migursearch">migursearch.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<media destination="plg_migursearch" folder="media">
+		<filename>migursearch.min.js</filename>
+		<filename>migursearch.css</filename>
+	</media>
+
+	<languages>
+		<language tag="en-GB">en-GB.plg_content_migursearch.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field 
+					name="usetemplate" 
+					type="templatestyle"
+					description="PLG_CONTENT_MIGURSEARCH_TEMPLATES_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_TEMPLATES_LABEL" 
+					default="6" />
+				<field 
+					name="siteurl" 
+					type="text" 
+					size="50"
+					description="PLG_CONTENT_MIGURSEARCH_SITEURL_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_SITEURL_LABEL" 
+					default="" />
+				<field 
+					name="limit" 
+					type="text" 
+					size="10"
+					description="PLG_CONTENT_MIGURSEARCH_LIMIT_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_LIMIT_LABEL" 
+					default="10" />
+				<field 
+					name="ordering" 
+					type="list" 
+					description="PLG_CONTENT_MIGURSEARCH_ORDERING_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_ORDERING_LABEL" 
+					default="asc" >
+					<option value="newest">PLG_CONTENT_MIGURSEARCH_NEWEST</option>
+					<option value="oldest">PLG_CONTENT_MIGURSEARCH_OLDEST</option>
+					<option value="popular">PLG_CONTENT_MIGURSEARCH_POPULAR</option>
+					<option value="alpha">PLG_CONTENT_MIGURSEARCH_ALPHA</option>
+					<option value="category">PLG_CONTENT_MIGURSEARCH_CATEGORY</option>
+				</field>
+				<field 
+					name="searchphrase" 
+					type="list" 
+					description="PLG_CONTENT_MIGURSEARCH_SEARCHPHRASE_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_SEARCHPHRASE_LABEL" 
+					default="any">
+					<option value="any">PLG_CONTENT_MIGURSEARCH_ANY</option>
+					<option value="all">PLG_CONTENT_MIGURSEARCH_ALL</option>
+					<option value="exact">PLG_CONTENT_MIGURSEARCH_EXACT</option>
+				</field>        
+
+				<field 
+					name="showspinner" 
+					type="radio" 
+					description="PLG_CONTENT_MIGURSEARCH_SHOWSPINER_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_SHOWSPINER_LABEL" 
+					default="0" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field 
+					name="showlink" 
+					type="radio" 
+					description="PLG_CONTENT_MIGURSEARCH_SHOWLINK_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_SHOWLINK_LABEL" 
+					default="1" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field 
+					name="advsearchlink" 
+					type="text" 
+					size="50"
+					description="PLG_CONTENT_MIGURSEARCH_ADVSEARCHLINK_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_ADVSEARCHLINK_LABEL" 
+					default="" />
+				<field 
+					name="showcategory" 
+					type="radio" 
+					description="PLG_CONTENT_MIGURSEARCH_SHOWCATEGORY_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_SHOWCATEGORY_LABEL" 
+					default="0" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field 
+					name="showreadmore" 
+					type="radio" 
+					description="PLG_CONTENT_MIGURSEARCH_SHOWREADMORE_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_SHOWREADMORE_LABEL" 
+					default="0" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field 
+					name="showdescription" 
+					type="radio" 
+					description="PLG_CONTENT_MIGURSEARCH_SHOWDESCRIPTION_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_SHOWDESCRIPTION_LABEL" 
+					default="1" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field 
+					name="shownoresults" 
+					type="radio" 
+					description="PLG_CONTENT_MIGURSEARCH_SHOWNORESULTS_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_SHOWNORESULTS_LABEL" 
+					default="0" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field 
+					name="delay" 
+					type="text" 
+					size="10"
+					description="PLG_CONTENT_MIGURSEARCH_DELAY_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_DELAY_LABEL" 
+					default="0" />
+				<field 
+					name="latency" 
+					type="text" 
+					size="10"
+					description="PLG_CONTENT_MIGURSEARCH_LATENCY_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_LATENCY_LABEL" 
+					default="500" />
+				<field 
+					name="usetemplateoverride" 
+					type="radio" 
+					description="PLG_CONTENT_MIGURSEARCH_OVERRIDE_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_OVERRIDE_LABEL" 
+					default="0" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>    
+				<field 
+					name="inputfieldid" 
+					type="text" 
+					size="50"
+					description="PLG_CONTENT_MIGURSEARCH_INPUTFIELDID_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_INPUTFIELDID_LABEL" 
+					default="mod-search-searchword" />
+			</fieldset>
+		</fields>
+	</config>
+        
+	<updateservers>
+		<server type="extension" priority="1" name="Migur Update Site">http://update.migur.com/ajaxsearch.xml</server>
+	</updateservers>
+</extension>
