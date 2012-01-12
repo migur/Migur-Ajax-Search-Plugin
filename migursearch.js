@@ -372,14 +372,13 @@ var MigurSearch = new Class(
 
 		// Positioning the box. Use css to set margins.
 		var coords = searchInput.getCoordinates($$('body')[0]);
-		
+
 		// Else create the div and inject into DOM
 		var resultsElement = new Element("div", {
 			'id': 'migursearch_results',
 			'styles': {
 				'position': 'absolute',
 				'top':      coords.top + coords.height,
-				'left':     coords.left,
 				'zIndex':   '65535'
 			}
 		});
@@ -392,14 +391,36 @@ var MigurSearch = new Class(
 				'href': '#',
 				'events': {
 					// Handler to hide the results box on click
-					click: function(){
+					click: function(ev){
+						
+						ev.stop();
+						
 						$('migursearch_results').setStyles({
 							'display': 'none'
 						});
+						
+						return false;
 					}
 				}
 			})
 		);
+			
+
+		// Now we know all dimensions. So we can correct positioning 
+		// if left or right positions grater than dimensions of body
+		var coordsBody = $$('body')[0].getCoordinates();
+		var box = $('migursearch_results');
+		var coordsBox = box.getCoordinates($$('body')[0]);
+
+		if (coords.left <= 0) {
+			box.setStyle('left', 0);
+		} else {
+			if (coords.left + coordsBox.width > coordsBody.width) {
+				box.setStyle('right', 10);
+			} else {
+				box.setStyle('left', coords.left)
+			}
+		}	
 	},
 
 	/**
@@ -500,9 +521,12 @@ window.addEvent('domready', function() {
 	// Main initialization of plugin on client side when page loaded.
 	var MigurSearchClass = new MigurSearch(MigurSearchOptions);
 	var MigurSearchFireClass = new MigurSearchFire;
-	$(MigurSearchOptions.inputFieldId).onkeyup = function(){
-		if($(MigurSearchOptions.inputFieldId).getProperty('value').length > 3) {
-			MigurSearchFireClass.fire(this, MigurSearchClass);
+	
+	if ($(MigurSearchOptions.inputFieldId)) {
+		$(MigurSearchOptions.inputFieldId).onkeyup = function(){
+			if($(MigurSearchOptions.inputFieldId).getProperty('value').length > 3) {
+				MigurSearchFireClass.fire(this, MigurSearchClass);
+			}
 		}
-	};
+	}	
 });
