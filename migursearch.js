@@ -15,8 +15,8 @@
 *
 * @author		Henrik Hussfelt <henrik@migur.com>
 * @package		plg_migursearch
-* @since		1.6
-* @version      1.0
+* @since		1.7
+* @version      1.0.3
 */
 
 var MigurSearch = new Class(
@@ -203,9 +203,24 @@ var MigurSearch = new Class(
 		if (this.options.show_spinner) {
 			if(s) {
 				// Show the spinner
-				this.inputfield.inject(new Element('span',{
-					'id':'mg_spinner'
-				}).set('text', '...'), 'before');
+				// Try to get the position for box with results
+				var searchInput = $(this.options.inputFieldId);
+				if (!searchInput) {
+					return false;
+				}
+
+				// Positioning the box. Use css to set margins.
+				var coords = searchInput.getCoordinates($$('body')[0]);
+				
+				$$('body')[0].grab(new Element('div',{
+					'id': 'mg_spinner',
+					'styles': {
+						'position': 'absolute',
+						'top':      coords.top + 2,
+						'left': coords.left + coords.width - 20,
+						'zIndex':   '65535'
+					}
+				}), 'after');
 			} else if($('mg_spinner')) {
 				// Remove spinner
 				$('mg_spinner').destroy();
