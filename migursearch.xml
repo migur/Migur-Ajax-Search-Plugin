@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>henrik@migur.com</authorEmail>
 	<authorUrl>www.migur.com</authorUrl>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<description>Unobtrusive lightweight search plugin</description>
 
 	<files>
@@ -20,7 +20,7 @@
 	</media>
 
 	<languages>
-		<language tag="en-GB">en-GB.plg_content_migursearch.ini</language>
+		<language tag="en-GB">languages/en-GB.plg_content_migursearch.ini</language>
 	</languages>
 
 	<config>
@@ -32,13 +32,6 @@
 					description="PLG_CONTENT_MIGURSEARCH_TEMPLATES_DESC"
 					label="PLG_CONTENT_MIGURSEARCH_TEMPLATES_LABEL" 
 					default="6" />
-				<field 
-					name="siteurl" 
-					type="text" 
-					size="50"
-					description="PLG_CONTENT_MIGURSEARCH_SITEURL_DESC"
-					label="PLG_CONTENT_MIGURSEARCH_SITEURL_LABEL" 
-					default="" />
 				<field 
 					name="limit" 
 					type="text" 
@@ -88,13 +81,6 @@
 					<option value="0">JNO</option>
 				</field>
 				<field 
-					name="advsearchlink" 
-					type="text" 
-					size="50"
-					description="PLG_CONTENT_MIGURSEARCH_ADVSEARCHLINK_DESC"
-					label="PLG_CONTENT_MIGURSEARCH_ADVSEARCHLINK_LABEL" 
-					default="" />
-				<field 
 					name="showcategory" 
 					type="radio" 
 					description="PLG_CONTENT_MIGURSEARCH_SHOWCATEGORY_DESC"
@@ -130,6 +116,25 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+				<field 
+					name="showresults" 
+					type="radio" 
+					description="PLG_CONTENT_MIGURSEARCH_SHOWRESULTS_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_SHOWRESULTS_LABEL" 
+					default="0" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+			
+			<fieldset name="advanced">
+				<field 
+					name="advsearchlink" 
+					type="text" 
+					size="50"
+					description="PLG_CONTENT_MIGURSEARCH_ADVSEARCHLINK_DESC"
+					label="PLG_CONTENT_MIGURSEARCH_ADVSEARCHLINK_LABEL" 
+					default="" />
 				<field 
 					name="delay" 
 					type="text" 

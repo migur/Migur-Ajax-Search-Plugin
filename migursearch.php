@@ -57,6 +57,7 @@ class plgContentMigursearch extends JPlugin
 				show_readmore: " . (int) $pars->get('showreadmore') . ",
 				show_description: " . (int) $pars->get('showdescription') . ",
 				show_no_results: " . (int) $pars->get('shownoresults') . ",
+				show_results: " . (int) $pars->get('showresults') . ",
 				hide_flash: " . (int) $pars->get('hideflash') . ",
 				delay: " . (int) $pars->get('delay') . ",
 				useTemplateOverride: " . (int) $pars->get('usetemplateoverride') . ",
