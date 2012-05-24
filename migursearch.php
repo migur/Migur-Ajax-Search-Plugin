@@ -35,6 +35,11 @@ class plgContentMigursearch extends JPlugin
 	{
 		parent::__construct($subject, $config);
 
+		// No need to use plugin in admin side
+		if (JFactory::getApplication()->isAdmin()) {
+			return;
+		}
+		
 		// First, load mootools
 		JHTML::_("behavior.mootools");
 
@@ -69,10 +74,10 @@ class plgContentMigursearch extends JPlugin
 		$doc->addScriptDeclaration($js);
 
 		// Add script
-		$doc->addScript(JURI::base() . "/media/plg_migursearch/migursearch.min.js");
+		$doc->addScript(JURI::root() . "media/plg_migursearch/migursearch.min.js");
 
 		// Add CSS
-		$doc->addStyleSheet(JURI::base() . "/media/plg_migursearch/migursearch.css");
+		$doc->addStyleSheet(JURI::root() . "media/plg_migursearch/migursearch.css");
 	}
 
 	/**
