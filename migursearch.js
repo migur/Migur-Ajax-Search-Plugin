@@ -73,7 +73,10 @@ var MigurSearch = new Class(
 		
 		// Show or not the short part of text for each item
 		show_description: 1,
-		
+
+		// Show the number of results
+		show_results: 1,
+
 		// Show the message if no results found
 		show_no_results: 1,
 		
@@ -157,10 +160,15 @@ var MigurSearch = new Class(
 					result.countText = migurClass.options.lang.totalfound.replace('%%', data.totalFound);
 				} else {
 					// or from HTML responce.
-					parsedData = migurClass.parseHTMLResult(responseElements);
+					
 					// Total found text from J! core
-					var elementTotalFound = responseElements[0].getElementsByClassName('searchintro', 'div');
+					var docFragment = new Element('div', {'html': responseHTML});
+					
+					parsedData = migurClass.parseHTMLResult(docFragment);
+					
+					elementTotalFound = docFragment.getElements('div.searchintro');
 					result.countText = String.from(elementTotalFound[0].getFirst().getFirst().get('text'));
+					delete docFragment;
 				}
 
 				result.results = parsedData;
@@ -226,10 +234,10 @@ var MigurSearch = new Class(
 		var resultArray = new Array();
 
 		// Get all element results
-		var elementTitles = result[0].getElementsByClassName('result-title', 'dt');
-		var elementCategories = result[0].getElementsByClassName('result-category', 'dd');
-		var elementText = result[0].getElementsByClassName('result-text', 'dd');
-		var elementCreated = result[0].getElementsByClassName('result-created', 'dd');
+		var elementTitles = result.getElements('dt.result-title');
+		var elementCategories = result.getElements('dd.result-category');
+		var elementText = result.getElements('dd.result-text');
+		var elementCreated = result.getElements('dd.result-created');
 
 		for (var i=0;i<elementTitles.length;i++) {
 			// Push togheter to row class
@@ -237,7 +245,7 @@ var MigurSearch = new Class(
 			// Href
 			rowClass.href = elementTitles[i].getElement('a').get('href').trim().stripScripts();
 			// Title
-			rowClass.title = elementTitles[i].getElement('a').get('text').trim().stripScripts();
+			rowClass.title = elementTitles[i].getElement('a').get('text').trim().stripScripts(); 
 			// Text
 			rowClass.text = elementText[i].get('html').stripScripts();
 			// Category
@@ -316,7 +324,7 @@ var MigurSearch = new Class(
 			});
 
 			// Setup show number of results if specified
-			if(this.options.show_no_results) {
+			if(this.options.show_results) {
 				// Add span into a, for css styleing
 				$('migursearch_results').grab(new Element('div', {
 					'id': 'mg_no_results'
@@ -492,9 +500,12 @@ window.addEvent('domready', function() {
 	// Main initialization of plugin on client side when page loaded.
 	var MigurSearchClass = new MigurSearch(MigurSearchOptions);
 	var MigurSearchFireClass = new MigurSearchFire;
-	$(MigurSearchOptions.inputFieldId).onkeyup = function(){
-		if($(MigurSearchOptions.inputFieldId).getProperty('value').length > 3) {
-			MigurSearchFireClass.fire(this, MigurSearchClass);
+	
+	if ($(MigurSearchOptions.inputFieldId)) {
+		$(MigurSearchOptions.inputFieldId).onkeyup = function(){
+			if($(MigurSearchOptions.inputFieldId).getProperty('value').length > 3) {
+				MigurSearchFireClass.fire(this, MigurSearchClass);
+			}
 		}
-	};
+	}	
 });
