@@ -15,8 +15,8 @@
 *
 * @author		Henrik Hussfelt <henrik@migur.com>
 * @package		plg_migursearch
-* @since		1.6
-* @version      1.0
+* @since		1.7
+* @version      1.0.3
 */
 
 var MigurSearch = new Class(
@@ -151,7 +151,9 @@ var MigurSearch = new Class(
                                 
 				var parsedData;
 				var result = {};
-				
+
+				migurClass.spinner(false);
+
 				// Lets create the transitional data set used for showing the results 
 				if(migurClass.options.useTemplateOverride == 1) {
 					// from JSON data....
@@ -167,7 +169,11 @@ var MigurSearch = new Class(
 					parsedData = migurClass.parseHTMLResult(docFragment);
 					
 					elementTotalFound = docFragment.getElements('div.searchintro');
-					result.countText = String.from(elementTotalFound[0].getFirst().getFirst().get('text'));
+					
+					try {
+						result.countText = String.from(elementTotalFound[0].getFirst().getFirst().get('text'));
+					} catch (e) {}	
+					
 					delete docFragment;
 				}
 
@@ -201,14 +207,31 @@ var MigurSearch = new Class(
 	spinner: function (s) {
 		// Setup spinner if we want to
 		if (this.options.show_spinner) {
+			
+			if ($('mg_spinner')) {
+				$('mg_spinner').destroy();
+			}	
+			
 			if(s) {
 				// Show the spinner
-				this.inputfield.inject(new Element('span',{
-					'id':'mg_spinner'
-				}).set('text', '...'), 'before');
-			} else if($('mg_spinner')) {
-				// Remove spinner
-				$('mg_spinner').destroy();
+				// Try to get the position for box with results
+				var searchInput = $(this.options.inputFieldId);
+				if (!searchInput) {
+					return false;
+				}
+
+				// Positioning the box. Use css to set margins.
+				var coords = searchInput.getCoordinates($$('body')[0]);
+				
+				$$('body')[0].grab(new Element('div',{
+					'id': 'mg_spinner',
+					'styles': {
+						'position': 'absolute',
+						'top':      coords.top + 2,
+						'left': coords.left + coords.width - 20,
+						'zIndex':   '65535'
+					}
+				}), 'after');
 			};
 		};
 	},
@@ -297,8 +320,6 @@ var MigurSearch = new Class(
 	 *	@return void
 	 */
 	show: function (res) {
-		// toggle spinner
-		this.spinner(false);
 
 		// Globalise class inside function
 		var migurClass = this;

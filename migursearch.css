@@ -123,3 +123,10 @@
     top: -10px;
     position: absolute;
 }
+
+#mg_spinner {
+	display: block;
+    background-image: url('preloader.gif');
+    width: 18px;
+    height: 18px;
+}
